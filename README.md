@@ -1,4 +1,4 @@
-# Facebook 貼文爬蟲常數說明文件
+# Facebook Post Crawler
 
 ## 原理
 
@@ -65,3 +65,7 @@ directory = 'posts'
 basic_filtered_patterns = ['已關閉這則貼文的回應功能。', '(禁|無)租屋?補助?']
 advanced_filtered_patterns = []
 ```
+
+## 後記(?)
+
+> 目前比較糟的大概就是一些設定直接放在 `main.py`，但我暫時懶得拆🥲
