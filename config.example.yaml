@@ -1,0 +1,17 @@
+facebook_email: ''
+facebook_password: ''
+crawl: true
+parse: true
+search_words:
+  - '租補'
+  - '租屋補助'
+latest_posts: true
+crawling_number: 50
+directory: 'posts'
+regex: true
+html_filtered_patterns:
+  - '已關閉這則貼文的回應功能。'
+  - '求租'
+post_content_filtered_patterns:
+  - '(禁|無)租屋?補助?'
+  - '[2-5]房'

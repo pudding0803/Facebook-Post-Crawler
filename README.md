@@ -19,22 +19,18 @@
 ## 套件安裝
 
 ```shell
-pip install beautifulsoup4 python-dotenv selenium tqdm
+pip install beautifulsoup4 selenium pyyaml tqdm webdriver_manager
 ```
 
 ## 環境變數
 
 ```shell
-cp .env.example .env
+cp config.example.yaml config.yaml
 ```
 
-### `.env`
+### `config.yaml`
 - 請設定 Facebook 之帳號密碼（不需經由驗證之帳號）
 - 較不建議使用主帳號，過於頻繁登入有可能會被封鎖（不確定）
-
-## 常數
-
-### `main.py`
 - 爬取與解析
   - `crawl`：是否進行爬取，並存下貼文的部分 HTML。
   - `parse`：是否解析 HTML 檔並輸出爬取的內容，目前只有輸出貼文連結與文章內容，須已爬取過才能解析。
@@ -44,28 +40,13 @@ cp .env.example .env
   - `crawling_number`：預計爬取的貼文數量（每組關鍵字獨立計算）。
   - `directory`：爬取貼文之部分 HTML 檔案的儲存位置。
 - 解析相關設定
-  - `basic_filtered_patterns`：要排除的字詞，支援 Regex 語法，排除範圍包含整個貼文。
-  - `advanced_filtered_patterns`：要排除的字詞，支援 Regex 語法，排除範圍包含整個貼文。
+  - `regex`：以下篩選之字串是否啟用 Regex 語法，若啟用請務必記得跳脫特殊字元。
+  - `html_filtered_patterns`：要排除的字詞，排除範圍包含整個貼文的 HTML。
+  - `post_content_filtered_patterns`：要排除的字詞，排除範圍僅為貼文內容。
 
 ### 備註
   - 由於 Facebook 的貼文是動態載入，因此爬取需要花上一定的時間（最多約為貼文數量 × 3 秒）。
   - 最終數量有可能比 `crawling_number` 多出 1 ~ 3 篇左右。
   - `basic_filtered_patterns` 與 `advanced_filtered_patterns` 無異，僅供使用者自由設定。
-  - 要排除的字詞請盡量嚴格，實際上是包含 HTML 內容的。
+  - `html_filtered_patterns` 的字詞請盡量嚴格，實際上是包含 HTML 標籤的。
   - 爬取期間請保持瀏覽器開啟。
-
-### 範例
-```python
-crawl = True
-parse = True
-search_words = ['租補', '租屋補助']
-latest_posts = True
-crawling_number = 50
-directory = 'posts'
-basic_filtered_patterns = ['已關閉這則貼文的回應功能。', '(禁|無)租屋?補助?']
-advanced_filtered_patterns = []
-```
-
-## 後記(?)
-
-> 目前比較糟的大概就是一些設定直接放在 `main.py`，但我暫時懶得拆🥲
